@@ -3,7 +3,6 @@ package org.bookstrore.service;
 
 import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bookstrore.entity.Book;
 import org.bookstrore.entity.CartItem;
 import org.bookstrore.repository.BookRepository;

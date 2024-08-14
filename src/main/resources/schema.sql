@@ -10,7 +10,7 @@ CREATE TABLE books (
 -- Create the 'cart_items' table
 CREATE TABLE cart_items (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    book_id BIGINT NOT NULL,
+    book VARCHAR(255) NOT NULL,
     quantity INTEGER NOT NULL,
-    FOREIGN KEY (book_id) REFERENCES books(id)
+    REFERENCES books(id)
 );
