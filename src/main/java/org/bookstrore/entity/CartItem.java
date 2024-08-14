@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 @io.swagger.v3.oas.annotations.media.Schema(description = "购物车项")
@@ -16,9 +14,6 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @io.swagger.v3.oas.annotations.media.Schema(description = "购物车项ID")
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "book_id")
 
     @io.swagger.v3.oas.annotations.media.Schema(description = "书籍")
     private String book;
