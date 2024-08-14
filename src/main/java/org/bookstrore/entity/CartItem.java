@@ -21,7 +21,7 @@ public class CartItem {
     @JoinColumn(name = "book_id")
 
     @io.swagger.v3.oas.annotations.media.Schema(description = "书籍")
-    private Book book;
+    private String book;
 
     @io.swagger.v3.oas.annotations.media.Schema(description = "数量")
     private int quantity;
@@ -35,11 +35,11 @@ public class CartItem {
         this.id = id;
     }
 
-    public Book getBook() {
+    public String getBook() {
         return book;
     }
 
-    public void setBook(Book book) {
+    public void setBook(String book) {
         this.book = book;
     }
 

@@ -1,6 +1,8 @@
 package org.bookstore;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bookstrore.controller.CartController;
 import org.bookstrore.entity.Book;
 import org.bookstrore.entity.CartItem;
@@ -36,7 +38,7 @@ class CartControllerTest {
     private BookService bookService;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws JsonProcessingException {
         Book book1 = new Book();
         book1.setId(1L);
         book1.setTitle("The Great Gatsby");
@@ -44,13 +46,14 @@ class CartControllerTest {
         book1.setPrice(12.99);
         book1.setCategory("Novel");
 
+        ObjectMapper objectMapper = new ObjectMapper();
         CartItem cartItem1 = new CartItem();
-        cartItem1.setBook(book1);
+        cartItem1.setBook(objectMapper.writeValueAsString(book1));
         cartItem1.setQuantity(2);
 
         when(bookService.addBook(book1)).thenReturn(book1);
         when(cartService.addToCart(1L, 2)).thenReturn(cartItem1);
-        when(cartService.getCartItems()).thenReturn(Arrays.asList(cartItem1));
+        when(cartService.getCartItems()).thenReturn(List.of(cartItem1));
         when(cartService.getTotalPrice()).thenReturn(25.98);
     }
 

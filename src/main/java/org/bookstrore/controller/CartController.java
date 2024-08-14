@@ -1,6 +1,7 @@
 package org.bookstrore.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.bookstrore.entity.CartItem;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Tag(name = "购物车接口", description = "购物车接口")
 @RestController
-//@RequestMapping("/api/cart")
+@RequestMapping("/api/cart")
 public class CartController {
 
     private final CartService cartService;
@@ -26,8 +27,13 @@ public class CartController {
 
     @Operation(summary = "添加到购物车")
     @PostMapping
-    public ResponseEntity<CartItem> addToCart(@RequestParam Long bookId, @RequestParam int quantity) {
-        CartItem cartItem = cartService.addToCart(bookId, quantity);
+    public ResponseEntity<CartItem> addToCart(@RequestParam Long bookId, @RequestParam int quantity){
+        CartItem cartItem = null;
+        try {
+            cartItem = cartService.addToCart(bookId, quantity);
+        } catch (JsonProcessingException e) {
+            return new ResponseEntity<>(HttpStatus.METHOD_FAILURE);
+        }
         return new ResponseEntity<>(cartItem, HttpStatus.CREATED);
     }
 
